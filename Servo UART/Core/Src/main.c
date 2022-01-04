@@ -208,37 +208,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		HAL_UART_Receive_IT(&huart1, &rx_data, 1);
 	}
 }
-/*
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-  if (huart -> Instance == USART1) {
-		HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
-		//HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
-		if (rx_data == 'A') {
-			//2ms Pwm - Servo motor arm rotates to 180 degree
-			//__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 200);
-			//__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 100);
-			printf("You send 'A'\r\n");
-			HAL_Delay(3000); // 1000ms
-		}
-		else if (rx_data == 'B') {
-			//1ms Pwm - Servo motor arm rotates to 0 degree
-			//__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 100);
-      //__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 200);
-			printf("You send 'B'\r\n");
-      HAL_Delay(3000); // 1000ms
-		}
-		else {
-			//1.5ms Pwm - Servo motor arm rotates to 90 degree
-      //__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 150);
-      //__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 150);
-			printf("You send SOMETHING\r\n");
-      HAL_Delay(3000); // 1000ms
-		}
-		HAL_UART_Receive_IT(&huart1, &rx_data, 1);
-	}
-}
-*/
 /* USER CODE END 4 */
 
 /**
