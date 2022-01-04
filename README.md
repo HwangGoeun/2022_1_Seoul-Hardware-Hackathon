@@ -5,3 +5,4 @@
 - S/W : STM32CubeMX / KEIL uVision 5
 
 Servo UART : 유아트 통신을 이용한 서보 제어 (카트 문 개폐)
+https://blog.naver.com/hwang_gim/222612908719
