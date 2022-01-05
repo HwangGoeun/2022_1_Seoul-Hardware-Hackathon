@@ -203,7 +203,6 @@ int main(void)
 							__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 200);
 							__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 200);
 							pir = get_PIR_status();
-							printf("%d\r\n", (int)pir.status);
 						} while (pir.status != 1);
 						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 0);
 						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 0);
