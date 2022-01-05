@@ -26,9 +26,13 @@ rfid card\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 rfid card\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 rfid card\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 rfid card\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h
+rfid card\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
+rfid card\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 rfid card\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 rfid card\main.o: ../Core/Inc/spi.h
+rfid card\main.o: ../Core/Inc/tim.h
 rfid card\main.o: ../Core/Inc/usart.h
 rfid card\main.o: ../Core/Inc/gpio.h
 rfid card\main.o: ..\Inc\rc522.h
 rfid card\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+rfid card\main.o: ..\Inc\pir_motion_sensor.h

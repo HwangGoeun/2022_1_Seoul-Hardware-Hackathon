@@ -3,6 +3,7 @@
 "rfid card\main.o"
 "rfid card\gpio.o"
 "rfid card\spi.o"
+"rfid card\tim.o"
 "rfid card\usart.o"
 "rfid card\stm32f1xx_it.o"
 "rfid card\stm32f1xx_hal_msp.o"
@@ -23,6 +24,7 @@
 "rfid card\stm32f1xx_hal_uart.o"
 "rfid card\system_stm32f1xx.o"
 "rfid card\rc522.o"
+"rfid card\pir_motion_sensor.o"
 --strict --scatter "RFID CARD\RFID CARD.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

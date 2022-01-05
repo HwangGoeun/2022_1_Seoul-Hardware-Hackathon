@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "spi.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -27,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "rc522.h"
 #include "stdio.h"
+#include "pir_motion_sensor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -121,8 +123,15 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   MX_USART1_UART_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
 	MFRC522_Init();
+	
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+	
+	__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 0);
+	__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -186,7 +195,19 @@ int main(void)
             size = sprintf(buff, "%02X %02X %02X %02X %02X %02X %02X %02X\r\n", str[8],str[9],str[10],str[11],str[12],str[13],str[14],str[15]);
             printf("%s", buff);
 						printf("-------------------------------------------------\r\n");
-        }
+					
+						PIRMotionSensor pir = get_PIR_status();
+						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 200);
+						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 200);
+						do {
+							__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 200);
+							__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 200);
+							pir = get_PIR_status();
+							printf("%d\r\n", (int)pir.status);
+						} while (pir.status != 1);
+						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 0);
+						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 0);
+				}
         HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
     }
 		else {
