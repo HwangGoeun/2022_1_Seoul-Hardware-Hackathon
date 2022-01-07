@@ -1,23 +1,28 @@
 from tkinter import *
 
 # 내용 삭제
-def delete() :
+def delete(entry_get) :
     global items
-    selection = listbox.curselection() # 리스트 박스 내에서 마우스 커서가 선택한 것
-    if (len(selection) == 0) : # 선택 안 하면
-        return # 돌아가기
-    
-    value = listbox.get(selection[0]) # value = 커서가 선택한 것
+    value = listbox.get(items.index(entry_get)) # listbox 내에서 entry_get 값을 반환
     ind = items.index(value) # items 리스트 내의 value 값 위치
+    listbox.delete(items.index(entry_get)) # 리스트 박스에서 삭제하기
     del items[ind] # times 리스트에서 [ind] 위치에 있는 값 삭제
-    listbox.delete(selection[0]) # 리스트 박스에서 삭제하기
+    entry.delete(0, 'end') # 엔트리 창 지우기
 
 # 내용 생성
-def add(event) :
+def add(entry_get) :
     global items
-    items.append(entry.get()) # 엔트리 입력창에서 얻은 값 itmes 리스트 끝에 추가
-    listbox.insert(END, entry.get()) # 마지막으로 들어간 문장 밑에 추가
+    items.append(entry_get) # 엔트리 입력창에서 얻은 값 itmes 리스트 끝에 추가
+    listbox.insert(END, entry_get) # 마지막으로 들어간 문장 밑에 추가
     entry.delete(0, 'end') # 엔트리 창 지우기
+
+# 중복 체크
+def check(event) :
+    global items
+    if entry.get() in items : # items 리스트 안에 entry.get() 값이 있으면
+        delete(entry.get()) # delete() 함수 실행
+    else : # 아니면
+        add(entry.get()) # add() 함수 실행
 
 window = Tk() # 윈도우 생성
 window.title("2022_Seoul_Hardware_Hackathon") # 윈도우 타이틀 설정
@@ -38,7 +43,7 @@ buttonDel.pack() # 삭제 버튼 보이기
 
 # Entry 생성
 entry = Entry(window, width = 30)
-entry.bind("<Return>", add) # enter 키가 입력되었을 때 add 함수 실행
+entry.bind("<Return>", check) # enter 키가 입력되었을 때 add 함수 실행
 entry.pack() # entry 창 보이기
 
 window.mainloop() # 윈도우 창 보이기
