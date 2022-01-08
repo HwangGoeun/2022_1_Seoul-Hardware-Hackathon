@@ -6,5 +6,6 @@
 
 Servo UART : 유아트 통신을 이용한 서보 제어 (카트 문 개폐)  
 https://blog.naver.com/hwang_gim/222612908719  
-RFID CARD : RFID 카드 태깅 후 서보 제어, PIR 센서 체크 후 서보 제어  
-https://blog.naver.com/hwang_gim/222613956763
+RFID CARD : RFID 카드 태깅 후 서보 제어, PIR 센서 체크 후 서보 제어
+https://blog.naver.com/hwang_gim/222613956763  
+Cart RFID : 상품에 부착된 RFID 태깅 후 카트 문 개폐  
