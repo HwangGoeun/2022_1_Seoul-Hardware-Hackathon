@@ -145,7 +145,7 @@ int main(void)
 	  if (status == MI_OK) {
 		  size = sprintf(buff, "%x%x%x%x\r\n", sn[0],sn[1],sn[2],sn[3]);
 		  printf("%s", buff);
-		  HAL_Delay(1000);
+		  HAL_Delay(3000);
 	  }
 	  else {
 		  //size = sprintf(buff, "CN: --------\r\n");

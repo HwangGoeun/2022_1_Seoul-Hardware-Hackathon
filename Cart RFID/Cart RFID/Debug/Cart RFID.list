@@ -303,8 +303,8 @@ int main(void)
  800028e:	490b      	ldr	r1, [pc, #44]	; (80002bc <main+0xb0>)
  8000290:	480c      	ldr	r0, [pc, #48]	; (80002c4 <main+0xb8>)
  8000292:	f003 f84d 	bl	8003330 <iprintf>
-		  HAL_Delay(3000);
- 8000296:	f640 30b8 	movw	r0, #3000	; 0xbb8
+		  HAL_Delay(1000);
+ 8000296:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  800029a:	f000 fe5b 	bl	8000f54 <HAL_Delay>
 		  //printf("%s", buff);
 	  }
