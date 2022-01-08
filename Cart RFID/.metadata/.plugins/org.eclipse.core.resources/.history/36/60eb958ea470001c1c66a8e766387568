@@ -111,24 +111,34 @@ int main(void)
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   MFRC522_Init();
-
-  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
-
-  __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 0);
-  __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  /*
+	  //MFRC522_Init();
+	  size = sprintf(buff, "\033[H\033[2J\r\n");
+	  printf("%s", buff);
+	  */
+
 	  HAL_Delay(20);
 
 	  status = MI_ERR;
 
 	  // Look for the card, return type
 	  status = MFRC522_Request(PICC_REQIDL, str);
+	  /*
+	  if (status == MI_OK) {
+		  size = sprintf(buff, "SAK: 0x%02X, 0x%02X\n\r", str[1], str[0]);
+	      printf("%s", buff);
+	  }
+	  else {
+	      //size = sprintf(buff, "SAK: ----  ----\r\n");
+		  //printf("%s", buff);
+	  }
+	  */
 
 	  // Anti-collision, return the card's 4-byte serial number
 	  status = MFRC522_Anticoll(sn);
@@ -136,16 +146,45 @@ int main(void)
 		  size = sprintf(buff, "%x%x%x%x\r\n", sn[0],sn[1],sn[2],sn[3]);
 		  printf("%s", buff);
 		  HAL_Delay(1000);
-
-		  // Cart Door Close
-		  __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 200);
-		  __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 200);
-		  HAL_Delay(8000);
-		  __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 0);
-		  __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 0);
 	  }
 	  else {
+		  //size = sprintf(buff, "CN: --------\r\n");
+		  //printf("%s", buff);
 	  }
+
+	  /*
+	  // Election card, return capacity
+	  RC_size = MFRC522_SelectTag(sn);
+	  if (RC_size != 0) {
+		  size = sprintf(buff, "CS: %d\r\n", RC_size);
+		  printf("%s", buff);
+	  }
+	  else {
+		  //size = sprintf(buff, "CS: -\r\n");
+		  //printf("%s", buff);
+	  }
+	  */
+
+	  /*
+	  // Card reader
+	  status = MFRC522_Auth(PICC_AUTHENT1A, 11, sectorKeyA[2], sn);
+	  if (status == MI_OK) {
+		  // Read data
+		  status = MFRC522_Read(11, str);
+		  if (status == MI_OK) {
+			  size = sprintf(buff, "%02X %02X %02X %02X %02X %02X %02X %02X\r\n", str[0],str[1],str[2],str[3],str[4],str[5],str[6],str[7]);
+			  printf("%s", buff);
+			  size = sprintf(buff, "%02X %02X %02X %02X %02X %02X %02X %02X\r\n", str[8],str[9],str[10],str[11],str[12],str[13],str[14],str[15]);
+			  printf("%s", buff);
+			  printf("-------------------------------------------------\r\n");
+		  }
+	  }
+	  else {
+		  //size = sprintf(buff, "-- -- -- -- -- -- -- --\r\n");
+		  //printf("%s", buff);
+	  }
+	  */
+	  // HAL_Delay(2);
 
 	  MFRC522_Halt();
 	  HAL_Delay(200);
