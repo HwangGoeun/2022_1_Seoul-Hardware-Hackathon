@@ -9,6 +9,9 @@ def delete(item) :
     ind = items.index(value) # items 리스트 내의 value 값 위치
     listbox.delete(items.index(item)) # 리스트 박스에서 삭제하기
     del items[ind] # times 리스트에서 [ind] 위치에 있는 값 삭제
+    with open(r"C:\2022_1_Seoul-Hardware-Hackathon\GUI\text.txt", "w", encoding="UTF-8") as f: # 리스트 값 파일에 추가
+        for item in items:
+            f.write(item)
     main()
 
 # 내용 생성
@@ -16,6 +19,9 @@ def add(item) :
     print("add 함수 실행했읍니다")
     global items
     items.append(item) # 엔트리 입력창에서 얻은 값 itmes 리스트 끝에 추가
+    with open(r"C:\2022_1_Seoul-Hardware-Hackathon\GUI\text.txt", "w", encoding="UTF-8") as f: # 리스트 값 파일에 추가
+        for item in items:
+            f.write(item)
     listbox.insert(END, item) # 마지막으로 들어간 문장 밑에 추가
     main()
 
