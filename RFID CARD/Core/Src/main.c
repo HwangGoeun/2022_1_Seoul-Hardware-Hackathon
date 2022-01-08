@@ -139,15 +139,13 @@ int main(void)
 	while (1)
   {
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		//HAL_Delay(500);
 		
 		//MFRC522_Init();
-		/*
 		size = sprintf(buff, "\033[H\033[2J\r\n");
 		printf("%s", buff);
 		
 		HAL_Delay(20);
-		*/
+		
 		status = MI_ERR;
 		
 		// Look for the card, return type
@@ -158,8 +156,6 @@ int main(void)
           HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_6);
     }
 		else {
-          //size = sprintf(buff, "SAK: ----  ----\r\n");
-          //printf("%s", buff);
     }
 		
 		// Anti-collision, return the card's 4-byte serial number
@@ -169,8 +165,6 @@ int main(void)
         printf("%s", buff);
     }
     else {
-        //size = sprintf(buff, "CN: --------\r\n");
-        //printf("%s", buff);
     }
 		
 		// Election card, return capacity
@@ -180,8 +174,6 @@ int main(void)
         printf("%s", buff);
     }
     else {
-        //size = sprintf(buff, "CS: -\r\n");
-        //printf("%s", buff);
     }
      
 		// Card reader
@@ -196,6 +188,7 @@ int main(void)
             printf("%s", buff);
 						printf("-------------------------------------------------\r\n");
 					
+					  // PIR Motion Sensor Check and Control Servo Motors
 						PIRMotionSensor pir = get_PIR_status();
 						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 200);
 						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 200);
@@ -204,17 +197,14 @@ int main(void)
 							__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 200);
 							pir = get_PIR_status();
 						} while (pir.status != 1);
+						HAL_Delay(8000);
 						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, 0);
 						__HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2, 0);
 				}
         HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
     }
 		else {
-			//size = sprintf(buff, "-- -- -- -- -- -- -- --\r\n");
-			//printf("%s", buff);
 		}
-
-    // HAL_Delay(2);
 
     MFRC522_Halt();
     HAL_Delay(200);
